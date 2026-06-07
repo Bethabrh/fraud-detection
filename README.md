@@ -1,71 +1,77 @@
-# Fraud Detection Project (Task 1 - Interim Submission)
+# 🚨 Fraud Detection System (E-commerce + Credit Card)
 
-## Overview
-This project focuses on detecting fraudulent transactions in two domains:
+## 📌 Overview
+This project builds a fraud detection pipeline for:
+- E-commerce transactions (with behavioral + geolocation data)
+- Credit card transactions (anonymized PCA features)
 
-1. E-commerce transactions  
-2. Credit card transactions  
-
-The objective is to analyze transaction behavior, engineer meaningful features, and prepare high-quality datasets for machine learning-based fraud detection.
-
-Fraud detection is a high-impact problem where both false positives and false negatives carry significant financial and operational costs.
+The goal is to detect fraudulent activity while handling severe class imbalance using machine learning techniques.
 
 ---
 
-## Datasets Used
+## 📂 Project Structure
+fraud-detection/
+│
+├── data/ (ignored in git)
+├── models/ # Saved models & artifacts
+├── notebooks/ # EDA, feature engineering, modeling
+├── src/ # Reusable pipeline code
+│ ├── data_loader.py
+│ ├── preprocessing.py
+├── scripts/ # Execution scripts
+├── tests/ # Basic tests (future extension)
+├── README.md
 
-- **Fraud_Data.csv** → E-commerce transaction data  
-- **creditcard.csv** → Bank credit card transactions (PCA-transformed features)  
-- **IpAddress_to_Country.csv** → IP geolocation mapping for country-level enrichment  
+## ⚙️ Setup Instructions
 
----
+### 1. Clone repository
+```bash
+git clone <repo-url>
+cd fraud-detection
+2. Create environment
+python -m venv venv
+venv\Scripts\activate   # Windows
+3. Install dependencies
+pip install -r requirements.txt
+📊 Workflow
+1. Data Loading
+Fraud dataset
+IP-to-country mapping
+Credit card dataset
+2. Preprocessing
+Missing value handling
+Duplicate removal
+Data type conversion
+3. Feature Engineering (E-commerce)
+time_since_signup
+hour_of_day
+day_of_week
+transaction_count
+IP → Country mapping
+4. Scaling & Encoding
+StandardScaler for numerical features
+OneHotEncoder for categorical features
+5. Class Imbalance Handling
+SMOTE applied ONLY on training data
+🧠 Key Insights
+Fraud is highly imbalanced (~9% or less)
+Time-based behavior is a strong fraud indicator
+Geolocation significantly improves fraud detection
+Rapid transactions after signup are high-risk signals
+📈 Modeling (Next Phase)
+Logistic Regression (baseline)
+Random Forest / XGBoost (ensemble)
+Evaluation metrics:
+F1 Score
+AUC-PR
+Confusion Matrix
+🧩 Explainability (Next Phase)
+SHAP analysis will be used to:
+Explain model decisions
+Identify key fraud drivers
+Provide business recommendations
+👨‍💻 Author
 
-## Work Completed (Task 1)
+Fraud Detection Project — 10 Academy Week 5–6 Challenge
 
-### 1. E-commerce Fraud Dataset
 
-- Data cleaning and validation
-- Exploratory Data Analysis (EDA)
-- Fraud class distribution analysis
-- IP address → country mapping (geolocation enrichment)
-
-#### Feature Engineering:
-- time_since_signup → detects rapid fraudulent activity
-- hour_of_day → captures unusual transaction timing
-- day_of_week → captures weekly behavioral patterns
-- transaction_count → detects abnormal user frequency patterns
-
-- Country-level fraud rate analysis
-
----
-
-### 2. Credit Card Dataset
-
-- Exploratory Data Analysis (EDA)
-- Class imbalance analysis
-- Transaction amount distribution analysis
-- Correlation analysis of PCA features
-
----
-
-## Key Insights
-
-- Both datasets are highly imbalanced, requiring specialized evaluation metrics (F1-score, AUC-PR)
-- Fraudulent behavior shows strong temporal and behavioral patterns
-- Geolocation (country) is a strong indicator of fraud risk
-- User behavior features significantly improve fraud detection capability
-- Traditional accuracy is not a suitable evaluation metric for this problem
-
----
-
-## Next Steps (Task 2 & 3)
-
-- Apply resampling techniques (SMOTE / undersampling)
-- Train baseline and ensemble models (Logistic Regression, Random Forest, XGBoost)
-- Evaluate using F1-score, confusion matrix, and AUC-PR
-- Model explainability using SHAP for feature interpretation
-
----
-
-## Status
-Task 1 completed successfully. Dataset is fully prepared for model development in Task 2.
